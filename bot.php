@@ -32,7 +32,7 @@ if($arrJson['events'][0]['message']['text'] == "สวัสดี"){
   if (!is_null($arrJson['events'])) {
 	  if ($event['type'] == 'message' && $event['message']['type'] == 'text') {
 		  $text = $event['message']['text'];
-		  $replyToken = $event['replyToken'];
+		  
 		  $arrPostData['messages'][0]['type'] = "text";
 		  $arrPostData['messages'][0]['text'] = $text;		
 			
