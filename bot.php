@@ -12,17 +12,17 @@ $arrHeader[] = "Content-Type: application/json";
 $arrHeader[] = "Authorization: Bearer {$AccessToken}";
 $messager = $arrJson['events'][0]['message']['text'];
 
-if($messager == "สวัสดี"){
+if($messager == "สวัสดี"||$messager == "hi"){
   $arrPostData = array();
   $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
   $arrPostData['messages'][0]['type'] = "text";
   $arrPostData['messages'][0]['text'] = "hi nice to meet u, your ID is ".$arrJson['events'][0]['source']['userId'];
-}else if($messager == "ชื่ออะไร"){
+}else if($messager == "ชื่ออะไร"||$messager == "name"){
   $arrPostData = array();
   $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
   $arrPostData['messages'][0]['type'] = "text";
   $arrPostData['messages'][0]['text'] = "my name is JUNE";
-}else if($messager == "ทำอะไรได้บ้าง"){
+}else if($messager == "ทำอะไรได้บ้าง"||$messager == "do"){
   $arrPostData = array();
   $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
   $arrPostData['messages'][0]['type'] = "text";
