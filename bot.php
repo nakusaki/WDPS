@@ -14,7 +14,7 @@ if (!is_null($events['events'])) {
 			// Build message to reply back
 			$messages = [
 				'type' => 'text',
-				'text' => 'hello world'
+				'text' => $text
 			];
 			
 			$url = 'https://api.line.me/v1/oauth/verify';
