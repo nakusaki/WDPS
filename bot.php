@@ -10,11 +10,11 @@ if (!is_null($events['events'])) {
 		if ($event['type'] == 'message' && $event['message']['type'] == 'text') {
 			//$text = $event['message']['text'];
 			$replyToken = $event['replyToken'];
-			
+			$text = 'hello world'
 			// Build message to reply back
 			$messages = [
 				'type' => 'text',
-				'text' => "I'm bot AI"
+				'text' => $text
 			];
 			
 			$url = 'https://api.line.me/v1/oauth/verify';
