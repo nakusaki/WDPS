@@ -9,7 +9,7 @@ if (!is_null($events['events'])) {
 	foreach ($events['events'] as $event) {
 		if ($event['type'] == 'message' && $event['message']['type'] == 'text') {
 			//$text = $event['message']['text'];
-			$text = "hello world"
+			$text = $event['message']['text'];
 			$replyToken = $event['replyToken'];
 			// Build message to reply back
 			$messages = [
