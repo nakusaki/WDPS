@@ -1,14 +1,17 @@
 <?php
 $access_token = '5TF8YwajpAxv97xxHptnLVb1sn207x3vSVpyar87nZ1C5NLMI0E1XYb7saPCLLOh7qzRVE4s6PM14kQNvd4xHQTJpkjYIyFccnydz358PaChN4rgMJ5CCMmfG2NwBe1LtEomwWW/IXgPNvom+0y1cAdB04t89/1O/w1cDnyilFU=';
 
-// Get POST body content
+// while data input to bot
 $content = file_get_contents('php://input');
+
 // Parse JSON
 $events = json_decode($content, true);
+
 // Validate parsed JSON data
 if (!is_null($events['events'])) {
+	echo "hello world\r\n";
 	// Loop through each event
-	foreach ($events['events'] as $event) {
+	/* foreach ($events['events'] as $event) {
 		// Reply only when message sent is in 'text' format
 		if ($event['type'] == 'message' && $event['message']['type'] == 'text') {
 			// Get text sent
@@ -42,6 +45,6 @@ if (!is_null($events['events'])) {
 
 			echo $result . "\r\n";
 		}
-	}
+	} */
 }
 echo "OK";
