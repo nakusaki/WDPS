@@ -1,30 +1,37 @@
 <?php
 $access_token = '5TF8YwajpAxv97xxHptnLVb1sn207x3vSVpyar87nZ1C5NLMI0E1XYb7saPCLLOh7qzRVE4s6PM14kQNvd4xHQTJpkjYIyFccnydz358PaChN4rgMJ5CCMmfG2NwBe1LtEomwWW/IXgPNvom+0y1cAdB04t89/1O/w1cDnyilFU=';
 
+// Get POST body content
 $content = file_get_contents('php://input');
 
+// Parse JSON
 $events = json_decode($content, true);
 
+// Validate parsed JSON data
 if (!is_null($events['events'])) {
+	// Loop through each event
 	foreach ($events['events'] as $event) {
+		// Reply only when message sent is in 'text' format
 		if ($event['type'] == 'message' && $event['message']['type'] == 'text') {
-			//$text = $event['message']['text'];
+			// Get text sent
 			$text = $event['message']['text'];
+			// Get replyToken
 			$replyToken = $event['replyToken'];
+
 			// Build message to reply back
 			$messages = [
 				'type' => 'text',
 				'text' => $text
 			];
-			
-			$url = 'https://api.line.me/v1/oauth/verify';
+
+			// Make a POST Request to Messaging API to reply to sender
+			$url = 'https://api.line.me/v2/bot/message/reply';
 			$data = [
 				'replyToken' => $replyToken,
 				'messages' => [$messages],
 			];
 			$post = json_encode($data);
 			$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
-			//$headers = array('Authorization: Bearer ' . $access_token);
 
 			$ch = curl_init($url);
 			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
@@ -34,10 +41,9 @@ if (!is_null($events['events'])) {
 			curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 			$result = curl_exec($ch);
 			curl_close($ch);
-			
+
 			echo $result . "\r\n";
 		}
 	}
 }
-
-echo "Bot OK";
+echo "OK";
