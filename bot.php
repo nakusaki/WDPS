@@ -10,7 +10,7 @@ $strUrl = "https://api.line.me/v2/bot/message/reply";
 $arrHeader = array();
 $arrHeader[] = "Content-Type: application/json";
 $arrHeader[] = "Authorization: Bearer {$AccessToken}";
- 
+
 if($arrJson['events'][0]['message']['text'] == "สวัสดี"){
   $arrPostData = array();
   $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
@@ -29,8 +29,13 @@ if($arrJson['events'][0]['message']['text'] == "สวัสดี"){
 }else{
   $arrPostData = array();
   $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
-  $arrPostData['messages'][0]['type'] = "text";
-  $arrPostData['messages'][0]['text'] = "ฉันไม่เข้าใจคำสั่ง";
+  if (!is_null($arrJson['events'])) {
+	  if ($event['type'] == 'message' && $event['message']['type'] == 'text') {
+		  $text = $event['message']['text'];
+		  $replyToken = $event['replyToken'];
+		  $arrPostData['messages'][0]['type'] = "text";
+		  $arrPostData['messages'][0]['text'] = $text;		
+			
 }
  
  
@@ -45,5 +50,5 @@ curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 $result = curl_exec($ch);
 curl_close ($ch);
  
-echo "hello bot api";
+echo "hello i'm June bot";
 ?>
