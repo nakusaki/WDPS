@@ -11,30 +11,40 @@ $arrHeader = array();
 $arrHeader[] = "Content-Type: application/json";
 $arrHeader[] = "Authorization: Bearer {$AccessToken}";
 
-if($arrJson['events'][0]['message']['text'] == "สวัสดี"){
+if($arrJson['events'][0]['message']['text'] == "สวัสดี"||"hi"||"hello"){
   $arrPostData = array();
   $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
   $arrPostData['messages'][0]['type'] = "text";
-  $arrPostData['messages'][0]['text'] = "สวัสดี ID คุณคือ ".$arrJson['events'][0]['source']['userId'];
-}else if($arrJson['events'][0]['message']['text'] == "ชื่ออะไร"){
+  $arrPostData['messages'][0]['text'] = "hi nice to meet u, your ID is ".$arrJson['events'][0]['source']['userId'];
+}else if($arrJson['events'][0]['message']['text'] == "ชื่ออะไร"|| "name"){
   $arrPostData = array();
   $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
   $arrPostData['messages'][0]['type'] = "text";
-  $arrPostData['messages'][0]['text'] = "ฉันยังไม่มีชื่อนะ";
-}else if($arrJson['events'][0]['message']['text'] == "ทำอะไรได้บ้าง"){
+  $arrPostData['messages'][0]['text'] = "my name is JUNE";
+}else if($arrJson['events'][0]['message']['text'] == "ทำอะไรได้บ้าง"||"do"){
   $arrPostData = array();
   $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
   $arrPostData['messages'][0]['type'] = "text";
-  $arrPostData['messages'][0]['text'] = "ฉันทำอะไรไม่ได้เลย คุณต้องสอนฉันอีกเยอะ";
+  $arrPostData['messages'][0]['text'] = "i can fly";
 }else{
   $arrPostData = array();
   $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
   if (!is_null($arrJson['events'])) {
+	  foreach ($arrJson['events'] as $event) {
 	  if ($event['type'] == 'message' && $event['message']['type'] == 'text') {
 		  $text = $event['message']['text'];
 		  
 		  $arrPostData['messages'][0]['type'] = "text";
 		  $arrPostData['messages'][0]['text'] = $text;		
+		}
+	  }
+  }
+  else{
+	$arrPostData = array();
+	$arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
+	$arrPostData['messages'][0]['type'] = "text";
+	$arrPostData['messages'][0]['text'] = "i don't understand??";
+  }
 			
 }
  
